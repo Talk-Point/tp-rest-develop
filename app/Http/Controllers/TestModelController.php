@@ -24,7 +24,7 @@ class TestModelController extends Controller
 
         $models = RESTQuery::createForModel($request, TestModel::class);
 
-        return response()->json($models);
+        return response()->json($models->get());
     }
 
     /**

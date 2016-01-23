@@ -26,7 +26,7 @@ class RESTQuery
     {
         $q = new RESTQuery($query, $request, $model_class);
 
-        return $q->getQuery();
+        return $q->query();
     }
 
     /**
@@ -38,7 +38,7 @@ class RESTQuery
      * @return mixed
      * @throws \Exception
      */
-    public static function createForModel($request, $model_class, $method='limit', $default_limit=100)
+    public static function createForModel($request, $model_class, $method='query', $default_limit=100)
     {
         if (!class_exists($model_class)) {
             throw new \Exception('RESTQuery Class not definied');
@@ -88,10 +88,10 @@ class RESTQuery
      * Rturn the generated Query for the Model
      * @return mixed
      */
-    public function getQuery()
+    public function query()
     {
         $this->filterQuery();
-        return $this->query->get();
+        return $this->query;
     }
 
     /**
