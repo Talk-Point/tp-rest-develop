@@ -22,9 +22,9 @@ class TestModelController extends Controller
     {
         //$models = RESTQuery::create(TestModel::where('id', '!=', 100), $request);
 
-        $models = RESTQuery::createForModel($request, TestModel::class);
+        $models = RESTQuery::createForModel($request, TestModel::class)->get();
 
-        return response()->json($models->get());
+        return response()->json($models);
     }
 
     /**

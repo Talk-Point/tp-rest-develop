@@ -25,7 +25,6 @@ class ModelParameterTest extends TestCase
         Input::replace($input = ['sortby' => 'id', 'is_active' => true, 'title' => 'Test', 'number_integer' => 8, 'number_double' => 100.9]);
 
         $m = new ModelParameter(\App\TestModel::class);
-        var_dump($m->getFilterParameter());
         $this->assertEquals([
             'is_active' => FilterType::BOOLEAN,
             'title' => FilterType::STRING,

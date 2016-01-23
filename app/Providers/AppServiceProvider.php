@@ -14,11 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        DB::listen(function($sql, $bindings, $time) {
+        /*DB::listen(function($sql, $bindings, $time) {
             var_dump($sql);
             var_dump($bindings);
             var_dump($time);
-        });
+        });*/
     }
 
     /**
