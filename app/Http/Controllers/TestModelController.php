@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TestModel;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,9 @@ class TestModelController extends Controller
      */
     public function index()
     {
-        //
+        $models = TestModel::all();
+
+        return response()->json($models);
     }
 
     /**
