@@ -16,9 +16,60 @@ $ composer require Talk-Point/TPREST
 
 ## Usage
 
+In the Controller use
+
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+$models = REST::create(TestModel::class)->query()->get();
+return response()->json($models);
+```
+
+### Parameter
+
+You can combine the parameter to a big search.
+
+#### Query Parameter
+
+Create a LIKE search for the column `title`
+
+```sh
+http://localhost:8001/tests?title=fff
+```
+
+### Matrix Parameter
+
+#### SortBy
+
+Sort output by a column.
+
+```sh
+http://localhost:8001/tests?sortby=id;asc
+http://localhost:8001/tests?sortby=id;desc
+```
+
+### Combine
+
+```json
+http://localhost:8001/tests?title=Pro&sortby=id&is_active=false
+[
+    {
+        "id": "49",
+        "title": "Prof. Delphine Cremin",
+        "is_active": false,
+        "number_integer": 7,
+        "number_double": 0,
+        "created_at": "2016-01-23 15:21:19",
+        "updated_at": "2016-01-23 15:21:19"
+    },
+    {
+        "id": "4",
+        "title": "Prof. Beryl Daugherty",
+        "is_active": false,
+        "number_integer": 9,
+        "number_double": 174.430750667,
+        "created_at": "2016-01-23 15:21:19",
+        "updated_at": "2016-01-23 15:21:19"
+    }
+]
 ```
 
 ## Change log
