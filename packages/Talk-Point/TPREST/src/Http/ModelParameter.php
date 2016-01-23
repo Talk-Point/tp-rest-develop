@@ -15,10 +15,24 @@ use ReflectionProperty;
 
 /**
  * ModelParameter with Type
+ *
+ * Create from the Input:: the parameter with search type to create easy Eloquent Querys
+ *
  * @package TPREST\Http
  */
 class ModelParameter
 {
+    /**
+     * Konstruktor
+     * @param string $model_class Model Class Name
+     * @return ModelParameter
+     */
+    public static function create($model_class)
+    {
+        $m = new ModelParameter($model_class);
+        return $m;
+    }
+
     /**
      * @var string Method Class
      */

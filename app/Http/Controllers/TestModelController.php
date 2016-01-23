@@ -20,7 +20,7 @@ class TestModelController extends Controller
      */
     public function index(Request $request)
     {
-        $models = RESTQuery::create(TestModel::where('id', '!=', 100), $request);
+        //$models = RESTQuery::create(TestModel::where('id', '!=', 100), $request);
 
         $models = RESTQuery::createForModel($request, TestModel::class);
 
