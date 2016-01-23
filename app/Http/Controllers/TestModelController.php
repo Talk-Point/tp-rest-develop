@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\TestModel;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use TPREST\Http\RESTQuery;
 use DB;
-use TPREST\Http\REST;
+use TPREST\Http\RESTQuery;
 
 class TestModelController extends Controller
 {
@@ -25,9 +26,14 @@ class TestModelController extends Controller
 
         //$models = RESTQuery::createForModel($request, TestModel::class)->get();
 
-        $models = REST::create(TestModel::class)->query()->get();
-
-        return response()->json($models);
+        try {
+            $models = RESTQuery::create(TestModel::class)->query()->get();
+            return response()->json($models);
+        } catch (QueryException $e) {
+            return response()->json(['message' => 'DB Query Exception', 'invalid' => $e->errorInfo[2]], 422);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'DB Query Exception'], 422);
+        }
     }
 
     /**

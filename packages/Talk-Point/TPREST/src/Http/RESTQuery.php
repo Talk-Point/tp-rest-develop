@@ -8,7 +8,7 @@ use TPREST\Models\QueryModelManager;
  * REST
  * @package TPREST\Http
  */
-class REST
+class RESTQuery
 {
     /**
      * Konstruktor
@@ -17,7 +17,7 @@ class REST
      */
     public static function create($model_class)
     {
-        $r = new REST($model_class);
+        $r = new RESTQuery($model_class);
         $r->attachParameterQuerys();
         return $r;
     }
