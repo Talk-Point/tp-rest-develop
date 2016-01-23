@@ -80,10 +80,6 @@ class ModelParameter
         $casts = $this->getCastsArrayFromModel();
         $parameter = array_except(Input::all(), $this->keyword_sort);
         foreach($parameter as $p => $value) {
-            // Check Model has attribute
-            if (!$this->hasModelColumn($p)) {
-                continue;
-            }
             if (array_key_exists($p, $casts)) {
                 switch($casts[$p]) {
                     case 'boolean':
@@ -104,12 +100,5 @@ class ModelParameter
         }
 
         return $a;
-    }
-
-    protected function hasModelColumn($column)
-    {
-        //var_dump($columns = \DB::connection()->getSchemaBuilder()->getColumnListing("test_models"));
-
-        return true;
     }
 }
