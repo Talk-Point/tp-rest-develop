@@ -29,10 +29,17 @@ class QueryOrderBy extends QueryModel
      * @param string $key sql table column
      * @param string $order ASC ord DESC
      */
-    public function __construct($key, $order='DESC')
+    public function __construct($key, $order='ASC')
     {
-        $this->key = $key;
-        $this->order = $order;
+        if (str_contains($key, ';')) {
+            $key_array = explode(';', $key);
+            $this->key = $key_array[0];
+            $this->order = $key_array[1];
+        } else {
+            $this->key = $key;
+            $this->order = $order;
+        }
+
     }
 
     /**
