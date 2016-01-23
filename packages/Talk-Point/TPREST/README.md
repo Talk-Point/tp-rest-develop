@@ -1,11 +1,7 @@
 # TPREST
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Talk-Point/tp-rest-develop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Talk-Point/tp-rest-develop/?branch=master)
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
 PSRs you support to avoid any confusion with users and contributors.

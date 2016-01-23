@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use TPREST\Http\RESTQuery;
 use DB;
+use TPREST\Http\REST;
 
 class TestModelController extends Controller
 {
@@ -22,7 +23,9 @@ class TestModelController extends Controller
     {
         //$models = RESTQuery::create(TestModel::where('id', '!=', 100), $request);
 
-        $models = RESTQuery::createForModel($request, TestModel::class)->get();
+        //$models = RESTQuery::createForModel($request, TestModel::class)->get();
+
+        $models = REST::create(TestModel::class)->query()->get();
 
         return response()->json($models);
     }
