@@ -13,7 +13,7 @@ class REST
     public static function create($model_class)
     {
         $r = new REST($model_class);
-        $r->parseParameter();
+        $r->attachParameterQuerys();
         return $r;
     }
 
@@ -28,7 +28,7 @@ class REST
         $this->query = call_user_func($model_class.'::query');
     }
 
-    protected function parseParameter()
+    protected function attachParameterQuerys()
     {
         $query_filter_array = QueryModelManager::create(Input::all(), $this->model_class);
         foreach($query_filter_array as $object) {
