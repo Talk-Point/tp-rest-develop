@@ -7,17 +7,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use TPREST\Http\RESTQuery;
+use DB;
 
 class TestModelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $models = TestModel::all();
+        $models = RESTQuery::create(TestModel::where('id', '!=', 100), $request);
+
+        $models = RESTQuery::createForModel($request, TestModel::class);
 
         return response()->json($models);
     }
