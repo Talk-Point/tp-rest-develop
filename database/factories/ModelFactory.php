@@ -25,7 +25,8 @@ $factory->define(\App\TestModel::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
         'is_active' => $faker->boolean(),
-        'number' => $faker->postcode
+        'number_integer' => $faker->randomDigit(),
+        'number_double' => $faker->randomFloat()
     ];
 });
 

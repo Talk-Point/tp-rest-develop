@@ -16,7 +16,8 @@ class CreateTestModelsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->boolean('is_active');
-            $table->integer('number');
+            $table->integer('number_integer');
+            $table->double('number_double');
             $table->timestamps();
         });
     }

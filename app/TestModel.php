@@ -11,5 +11,5 @@ class TestModel extends Model
      *
      * @var array
      */
-    protected $casts = ['is_active' => 'boolean',];
+    public $casts = ['is_active' => 'boolean', 'number_double' => 'double', 'number_integer' => 'integer'];
 }

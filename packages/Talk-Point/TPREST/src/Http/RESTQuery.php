@@ -2,6 +2,7 @@
 
 namespace TPREST\Http;
 
+use App\TestModel;
 use Illuminate\Support\Facades\Input;
 
 class RESTQuery
@@ -26,7 +27,6 @@ class RESTQuery
 
     protected $query;
     protected $request;
-    protected $keywords = ['sortby', 'descending', 'ascending', 'desc', 'asc', 'limit', 'offset'];
 
     public function __construct($query, $request)
     {
@@ -37,10 +37,7 @@ class RESTQuery
 
     protected function parseFilter()
     {
-        $parameter = array_except(Input::all(), $this->keywords);
-        foreach($parameter as $key => $value) {
-            $this->query->where($key, 'LIKE', '%'.$value.'%');
-        }
+
     }
 
     public function getQuery()
