@@ -19,8 +19,14 @@ $ composer require Talk-Point/TPREST
 In the Controller use
 
 ``` php
-$models = REST::create(TestModel::class)->query()->get();
-return response()->json($models);
+try {
+    $models = RESTQuery::create(TestModel::class)->query()->get();
+    return response()->json($models);
+} catch (QueryException $e) {
+    return response()->json(['message' => 'DB Query Exception', 'invalid' => $e->errorInfo[2]], 422);
+} catch (Exception $e) {
+    return response()->json(['message' => 'DB Query Exception'], 422);
+}
 ```
 
 ### Parameter

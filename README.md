@@ -1,27 +1,121 @@
-## Laravel PHP Framework
+# TP-REST-Framework
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status](https://semaphoreci.com/api/v1/projects/03725e83-abe2-402f-9b10-54ca2e0fbc79/671591/badge.svg)](https://semaphoreci.com/k-st-tp/tp-rest-develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Talk-Point/tp-rest-develop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Talk-Point/tp-rest-develop/?branch=master)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Laravel package for REST API creation.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Install
 
-## Official Documentation
+Via Composer
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+``` bash
+$ composer require Talk-Point/TPREST
+```
+
+## Usage
+
+In the Controller use
+
+``` php
+try {
+    $models = RESTQuery::create(TestModel::class)->query()->get();
+    return response()->json($models);
+} catch (QueryException $e) {
+    return response()->json(['message' => 'DB Query Exception', 'invalid' => $e->errorInfo[2]], 422);
+} catch (Exception $e) {
+    return response()->json(['message' => 'DB Query Exception'], 422);
+}
+```
+
+### Parameter
+
+You can combine the parameter to a big search.
+
+#### Query Parameter
+
+Create a LIKE search for the column `title`
+
+```sh
+http://localhost:8001/tests?title=fff
+```
+
+### Matrix Parameter
+
+#### SortBy
+
+Sort output by a column.
+
+```sh
+http://localhost:8001/tests?sortby=id;asc
+http://localhost:8001/tests?sortby=id;desc
+```
+
+### Combine
+
+```json
+http://localhost:8001/tests?title=Pro&sortby=id&is_active=false
+[
+    {
+        "id": "49",
+        "title": "Prof. Delphine Cremin",
+        "is_active": false,
+        "number_integer": 7,
+        "number_double": 0,
+        "created_at": "2016-01-23 15:21:19",
+        "updated_at": "2016-01-23 15:21:19"
+    },
+    {
+        "id": "4",
+        "title": "Prof. Beryl Daugherty",
+        "is_active": false,
+        "number_integer": 9,
+        "number_double": 174.430750667,
+        "created_at": "2016-01-23 15:21:19",
+        "updated_at": "2016-01-23 15:21:19"
+    }
+]
+```
+
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Testing
+
+``` bash
+$ composer test
+```
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
-## Security Vulnerabilities
+## Security
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+If you discover any security related issues, please email it@talk-point.de instead of using the issue tracker.
 
-### License
+## Credits
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+- [Talk-Point][link-author]
+- [All Contributors][link-contributors]
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/Talk-Point/TPREST.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/Talk-Point/TPREST/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/Talk-Point/TPREST.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Talk-Point/TPREST.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/Talk-Point/TPREST.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/Talk-Point/TPREST
+[link-travis]: https://travis-ci.org/Talk-Point/TPREST
+[link-scrutinizer]: https://scrutinizer-ci.com/g/Talk-Point/TPREST/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/Talk-Point/TPREST
+[link-downloads]: https://packagist.org/packages/Talk-Point/TPREST
+[link-author]: https://github.com/talk-point
+[link-contributors]: ../../contributors
