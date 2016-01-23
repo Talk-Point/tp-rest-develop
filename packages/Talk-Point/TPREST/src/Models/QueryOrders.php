@@ -13,7 +13,7 @@ class QueryOrders extends QueryModel
 {
     public static function create($key, $value)
     {
-        switch($key) {
+        switch(strtolower($key)) {
             case 'sortby':
                 return new QueryOrderBy($value);
             default:

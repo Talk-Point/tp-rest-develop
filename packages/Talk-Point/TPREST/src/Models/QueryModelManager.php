@@ -11,6 +11,12 @@ use ReflectionProperty;
  */
 class QueryModelManager
 {
+    /**
+     * Create Factory
+     * @param array $parameter_array Array with GET Parameter
+     * @param string $model_class Model Class
+     * @return array of Filter Objects
+     */
     public static function create($parameter_array, $model_class)
     {
         $manager = new QueryModelManager($parameter_array, $model_class);
@@ -23,13 +29,25 @@ class QueryModelManager
      */
     protected $keywords = ['sortby', 'descending', 'ascending', 'desc', 'asc', 'limit', 'offset'];
 
+    /**
+     * Objects tahts filtered By
+     * @var array
+     */
     protected $querys_objetcs = [];
 
+    /**
+     * @var string Model Class
+     */
     protected $model_class;
+    /**
+     * @var array proteced $cast array from Model
+     */
     protected $model_cast_array;
 
     /**
      * QueryModel constructor.
+     * @param array $parameter_array Array with GET Parameter
+     * @param string $model_class Model Class
      */
     public function __construct($parameter_array, $model_class)
     {
@@ -43,7 +61,7 @@ class QueryModelManager
     }
 
     /**
-     * Return the Objects
+     * Getter Query Objects
      * @return array
      */
     public function getQuerysObjetcs()
@@ -67,17 +85,31 @@ class QueryModelManager
         return null;
     }
 
-    public function createFilterObjects($array)
+    /**
+     * Create Filter
+     * @param $array
+     */
+    protected function createFilterObjects($array)
     {
         foreach($array as $key => $value) {
-            array_push($this->querys_objetcs, QueryFilter::create($key, $value, $this->model_cast_array));
+            $object = QueryFilter::create($key, $value, $this->model_cast_array);
+            if (!is_null($object)) {
+                array_push($this->querys_objetcs, $object);
+            }
         }
     }
 
-    public function createOrderingObjects($array)
+    /**
+     * Create Other Filter
+     * @param $array
+     */
+    protected function createOrderingObjects($array)
     {
         foreach($array as $key => $value) {
-            array_push($this->querys_objetcs, QueryOrders::create($key, $value, ''));
+            $object = QueryOrders::create($key, $value, '');
+            if (!is_null($object)) {
+                array_push($this->querys_objetcs, $object);
+            }
         }
     }
 }
