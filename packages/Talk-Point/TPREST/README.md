@@ -35,11 +35,18 @@ You can combine the parameter to a big search.
 
 #### Query Parameter
 
-Create a LIKE search for the column `title`
+Easy search in columns
 
 ```sh
-http://localhost:8001/tests?title=fff
+http://localhost:8001/tests?title=Prof
 ```
+
+__Options:__
+
+Filter Parameter with format `column=filter;option`
+
+Possible Options: `equal` `=` `<` `>` `<=` `>=` `<>` `!=` `like` `startwith` `endwith`, `!like`
+
 
 ### Matrix Parameter
 

@@ -17,10 +17,58 @@ class QueryFilter extends QueryModel
     public static function create($key, $value, $cast_array)
     {
         if (array_key_exists($key, $cast_array)) {
-            if ($cast_array[$key] != 'string') {
-                return new QueryFilterWhere($key, $value);
-            }
+            return new QueryFilterWhere($key, $value, $cast_array[$key]);
         }
-        return new QueryFilterLike($key, $value);
+        return new QueryFilterWhere($key, $value, 'string');
+    }
+
+    /**
+     * QueryFilter constructor.
+     * @param string $key sql table column
+     * @param mixed $value value that filtered
+     */
+    public function __construct($key, $value)
+    {
+        $this->key = $key;
+        $this->value = $value;
+        $this->extract_options();
+    }
+
+    /**
+     * @var string sql table column
+     */
+    protected $key;
+    /**
+     * @var mixed filter by
+     */
+    protected $value;
+
+    /**
+     * @var array options after ;
+     */
+    protected $options_array;
+
+    /**
+     * Extract Options
+     */
+    protected function extract_options()
+    {
+        if (str_contains($this->value, ';')) {
+            $this->options_array = explode(';', $this->value);
+            $this->value = $this->options_array[0];
+            array_shift($this->options_array);
+            $arr = [];
+            foreach($this->options_array as $e) {
+                if (!(is_string($e) && $e=='')) {
+                    array_push($arr, $e);
+                }
+            }
+            $this->options_array = $arr;
+        }
+    }
+
+    protected function getNextOperator()
+    {
+        return array_shift($this->options_array);
     }
 }
