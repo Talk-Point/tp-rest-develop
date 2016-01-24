@@ -34,10 +34,11 @@ class QueryFilterTest extends TestCase
             'title' => 'Prof',
             'title2' => 'Prof;!',
             'number_double' => '3.14;<>',
+            'number_float' => '1.5;<>',
+            'number_integer' => '1;<>',
             'sortby' => 'id;desc',
         ]);
         $sql = RESTQuery::create(TestModel::class)->query()->toSql();
-        var_dump($sql);
 
         $this->assertContains('where `title` LIKE ?', $sql);
         $this->assertContains('`title2` != ?', $sql);

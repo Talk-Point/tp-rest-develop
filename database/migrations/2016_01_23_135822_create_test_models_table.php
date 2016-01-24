@@ -18,6 +18,7 @@ class CreateTestModelsTable extends Migration
             $table->boolean('is_active');
             $table->integer('number_integer');
             $table->double('number_double');
+            $table->float('number_float');
             $table->timestamps();
         });
     }

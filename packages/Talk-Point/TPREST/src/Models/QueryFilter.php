@@ -12,7 +12,7 @@ class QueryFilter extends QueryModel
      * @param string $key sql table column
      * @param mixed $value value that filtered by
      * @param array $cast_array protected $cast Array from the Model Class
-     * @return QueryFilterLike|QueryFilterWhere
+     * @return QueryFilterWhere
      */
     public static function create($key, $value, $cast_array)
     {
