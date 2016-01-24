@@ -27,10 +27,29 @@ class QueryOrderBy extends QueryModel
         if (str_contains($key, ';')) {
             $key_array = explode(';', $key);
             $this->key = $key_array[0];
-            $this->ordering = $key_array[1];
+            $this->chooseOrdering($key_array[1]);
         } else {
             $this->key = $key;
             $this->ordering = $ordering;
+        }
+    }
+
+    /**
+     * Choose Ordering ASC or DESC
+     * @param string $order_key OrderKey
+     * @return string
+     */
+    public function chooseOrdering($order_key)
+    {
+        switch(strtolower($order_key)) {
+            case 'ascending':
+            case 'asc':
+                return OrderingInterface::ASC;
+            case 'descending':
+            case 'desc':
+                return OrderingInterface::DESC;
+            default:
+                return OrderingInterface::ASC;
         }
     }
 
