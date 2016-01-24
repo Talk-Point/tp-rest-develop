@@ -9,8 +9,17 @@
 namespace TPREST\Models;
 
 
+/**
+ * Class QueryOrders
+ * @package TPREST\Models
+ */
 class QueryOrders extends QueryModel
 {
+    /**
+     * @param $key
+     * @param $value
+     * @return null|QueryOrderBy
+     */
     public static function create($key, $value)
     {
         switch(strtolower($key)) {
