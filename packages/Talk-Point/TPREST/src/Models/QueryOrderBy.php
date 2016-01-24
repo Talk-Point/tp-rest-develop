@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: konstantinstoldt
- * Date: 23/01/16
- * Time: 17:55
- */
 
 namespace TPREST\Models;
-
 
 /**
  * Class QueryOrderBy
@@ -39,7 +32,6 @@ class QueryOrderBy extends QueryModel
             $this->key = $key;
             $this->order = $order;
         }
-
     }
 
     /**
