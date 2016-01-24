@@ -1,8 +1,8 @@
 # TP-REST-Framework
 
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status](https://semaphoreci.com/api/v1/projects/03725e83-abe2-402f-9b10-54ca2e0fbc79/671591/badge.svg)](https://semaphoreci.com/k-st-tp/tp-rest-develop)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Talk-Point/tp-rest-develop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Talk-Point/tp-rest-develop/?branch=master)
+[![Build Status](https://semaphoreci.com/api/v1/projects/03725e83-abe2-402f-9b10-54ca2e0fbc79/671591/badge.svg)](https://semaphoreci.com/k-st-tp/tp-rest-develop)
 
 Laravel package for REST API creation.
 
@@ -44,6 +44,10 @@ http://localhost:8001/tests?title=Prof
 __Options:__
 
 Filter Parameter with format `column=filter;option`
+
+```sh
+http://localhost:8001/tests?title=Prof;!like&sortby=id;desc&number_integer=3;%3C%3E&title=Dr.
+```
 
 Possible Options: `equal` `=` `<` `>` `<=` `>=` `<>` `!=` `like` `startwith` `endwith`, `!like`
 
