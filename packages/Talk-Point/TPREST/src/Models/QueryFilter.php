@@ -62,7 +62,7 @@ class QueryFilter extends QueryModel
     {
         if (str_contains($this->value, ';')) {
             $this->options_array = explode(';', $this->value);
-            $this->value = $this->options_array[0];
+            $this->value = $this->options_array[ 0 ];
             array_shift($this->options_array);
             $this->remove_empty_options();
         }
@@ -73,9 +73,9 @@ class QueryFilter extends QueryModel
      */
     protected function remove_empty_options()
     {
-        $arr = [];
-        foreach($this->options_array as $e) {
-            if (!(is_string($e) && $e=='')) {
+        $arr = [ ];
+        foreach ($this->options_array as $e) {
+            if (!(is_string($e) && $e == '')) {
                 array_push($arr, $e);
             }
         }
