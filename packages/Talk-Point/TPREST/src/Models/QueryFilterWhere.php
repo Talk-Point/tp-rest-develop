@@ -38,63 +38,78 @@ class QueryFilterWhere extends QueryFilter
     public function __construct($key, $value, $cast_type='string')
     {
         parent::__construct($key, $value, $cast_type);
-        $this->chooseOperator($cast_type);
+        $this->chooseOperator();
     }
 
     /**
      * Chose to the type a operator
-     * @param $cast_type
      */
-    protected function chooseOperator($cast_type)
+    protected function chooseOperator()
     {
         if (count($this->options_array) == 0) {
-            // Default value
-            if ($cast_type == 'string') {
-                $this->operator = 'LIKE';
-                $this->value = "%" . $this->value . "%";
-            } else {
-                $this->operator = '=';
-            }
+            $this->chosseOperatorDefault();
         } else {
-            switch($this->getNextOperator()) {
-                case 'equal':
-                case '=':
-                    $this->operator = '=';
-                    break;
-                case '<':
-                    $this->operator = '<';
-                    break;
-                case '>':
-                    $this->operator = '>';
-                    break;
-                case '<=':
-                    $this->operator = '<=';
-                    break;
-                case '>=':
-                    $this->operator = '>=';
-                    break;
-                case '<>':
-                    $this->operator = '<>';
-                    break;
-                case '!=':
-                case '!':
-                    $this->operator = '!=';
-                    break;
-                case 'startwith':
-                    $this->operatorLike('LIKE', $start=false, $end=true);
-                    break;
-                case 'endwith':
-                    $this->operatorLike('LIKE', $start=true, $end=false);
-                    break;
-                case 'like':
-                    $this->operatorLike('LIKE', $start=true, $end=true);
-                    break;
-                case '!like':
-                    $this->operatorLike('NOT LIKE', $start=true, $end=true);
-                    break;
-                default:
-                    $this->operatorLike('LIKE', $start=true, $end=true);
-            }
+            $this->chooserOperatorWithOptions();
+        }
+    }
+
+    /**
+     *  Choose Operator Default
+     */
+    public function chosseOperatorDefault()
+    {
+        // Default value
+        if ($this->cast_type == 'string') {
+            $this->operator = 'LIKE';
+            $this->value = "%" . $this->value . "%";
+        } else {
+            $this->operator = '=';
+        }
+    }
+
+    /**
+     * Choose Operator by Options
+     */
+    public function chooserOperatorWithOptions()
+    {
+        switch($this->getNextOperator()) {
+            case 'equal':
+            case '=':
+                $this->operator = '=';
+                break;
+            case '<':
+                $this->operator = '<';
+                break;
+            case '>':
+                $this->operator = '>';
+                break;
+            case '<=':
+                $this->operator = '<=';
+                break;
+            case '>=':
+                $this->operator = '>=';
+                break;
+            case '<>':
+                $this->operator = '<>';
+                break;
+            case '!=':
+            case '!':
+                $this->operator = '!=';
+                break;
+            case 'startwith':
+                $this->operatorLike('LIKE', $start=false, $end=true);
+                break;
+            case 'endwith':
+                $this->operatorLike('LIKE', $start=true, $end=false);
+                break;
+            case 'like':
+                $this->operatorLike('LIKE', $start=true, $end=true);
+                break;
+            case '!like':
+                $this->operatorLike('NOT LIKE', $start=true, $end=true);
+                break;
+            default:
+                $this->operatorLike('LIKE', $start=true, $end=true);
         }
     }
 
