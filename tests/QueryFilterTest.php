@@ -19,6 +19,8 @@ class QueryFilterTest extends TestCase
             'number_float' => '1.5;<>',
             'number_integer' => '1;<>',
             'sortby' => 'id;desc',
+            'limit' => 10,
+            'offset' => 5
         ]);
         $sql = RESTQuery::create(TestModel::class)->query()->toSql();
 
@@ -26,5 +28,7 @@ class QueryFilterTest extends TestCase
         $this->assertContains('`title2` != ?', $sql);
         $this->assertContains('`number_double` <> ?', $sql);
         $this->assertContains('order by `id` desc', $sql);
+        $this->assertContains('limit 10', $sql);
+        $this->assertContains('offset 5', $sql);
     }
 }

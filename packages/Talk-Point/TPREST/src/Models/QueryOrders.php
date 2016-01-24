@@ -16,6 +16,11 @@ class QueryOrders extends QueryModel
         switch(strtolower($key)) {
             case 'sortby':
                 return new QueryOrderBy($value);
+                break;
+            case 'limit':
+                return new QueryOrderLimit($value);
+            case 'offset':
+                return new QueryOrderOffset($value);
             default:
                 return new QueryOrders();
         }
