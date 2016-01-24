@@ -17,7 +17,7 @@ class QueryFilter extends QueryModel
     public static function create($key, $value, $cast_array)
     {
         if (array_key_exists($key, $cast_array)) {
-            return new QueryFilterWhere($key, $value, $cast_array[$key]);
+            return new QueryFilterWhere($key, $value, $cast_array[ $key ]);
         }
         return new QueryFilterWhere($key, $value, 'string');
     }
@@ -28,7 +28,7 @@ class QueryFilter extends QueryModel
      * @param mixed $value value that filtered
      * @param string $cast_type Type of element
      */
-    public function __construct($key, $value, $cast_type='string')
+    public function __construct($key, $value, $cast_type = 'string')
     {
         $this->key = $key;
         $this->value = $value;
@@ -96,7 +96,7 @@ class QueryFilter extends QueryModel
      */
     protected function castValue()
     {
-        switch($this->cast_type) {
+        switch ($this->cast_type) {
             case 'float':
                 $this->value = floatval($this->value);
                 break;
