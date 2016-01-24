@@ -58,6 +58,7 @@ class QueryModelManager
 
         $this->createFilterObjects($parameter_filter);
         $this->createOrderingObjects($parameter_array);
+        $this->createPagningObjetcs($parameter_array);
     }
 
     /**
@@ -100,7 +101,7 @@ class QueryModelManager
     }
 
     /**
-     * Create Other Filter
+     * Create Order Filter
      * @param $array
      */
     protected function createOrderingObjects($array)
@@ -110,6 +111,25 @@ class QueryModelManager
             if (!is_null($object)) {
                 array_push($this->querys_objetcs, $object);
             }
+        }
+    }
+
+    /**
+     * Create Pagning Filter
+     * @param $parameter_array
+     */
+    private function createPagningObjetcs($parameter_array)
+    {
+        $limit = null;
+        if (array_key_exists('limit', $parameter_array)) {
+            $limit = $parameter_array['limit'];
+        }
+        $offset = 0;
+        if (array_key_exists('offset', $parameter_array)) {
+            $offset = $parameter_array['offset'];
+        }
+        if (!is_null($limit)) {
+            array_push($this->querys_objetcs, new QueryOrderLimit($limit, $offset));
         }
     }
 }

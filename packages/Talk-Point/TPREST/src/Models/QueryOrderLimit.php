@@ -14,12 +14,19 @@ class QueryOrderLimit extends QueryModel
     protected $limit;
 
     /**
+     * @var int offset
+     */
+    protected $offset;
+
+    /**
      * QueryOrderBy constructor.
      * @param int $limit Limit
+     * @param int $offset Offset parameter
      */
-    public function __construct($limit=100)
+    public function __construct($limit=100, $offset=0)
     {
         $this->limit = $limit;
+        $this->offset = $offset;
     }
 
     /**
@@ -30,7 +37,10 @@ class QueryOrderLimit extends QueryModel
     public function query($query)
     {
         if ($this->limit > 0) {
-            return $query->limit(intval($this->limit));
+            $query = $query->limit(intval($this->limit));
+        }
+        if ($this->offset != 0) {
+            $query = $query->skip(intval($this->offset));
         }
         return $query;
     }

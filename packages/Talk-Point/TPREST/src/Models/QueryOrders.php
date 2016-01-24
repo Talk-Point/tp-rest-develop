@@ -17,12 +17,8 @@ class QueryOrders extends QueryModel
             case 'sortby':
                 return new QueryOrderBy($value);
                 break;
-            case 'limit':
-                return new QueryOrderLimit($value);
-            case 'offset':
-                return new QueryOrderOffset($value);
             default:
-                return new QueryOrders();
+                return null;
         }
     }
 }
