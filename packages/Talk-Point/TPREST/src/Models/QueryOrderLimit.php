@@ -23,7 +23,7 @@ class QueryOrderLimit extends QueryModel
      * @param int $limit Limit
      * @param int $offset Offset parameter
      */
-    public function __construct($limit=100, $offset=0)
+    public function __construct($limit = 100, $offset = 0)
     {
         $this->limit = $limit;
         $this->offset = $offset;
