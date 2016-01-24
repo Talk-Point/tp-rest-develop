@@ -80,26 +80,38 @@ class QueryFilterWhere extends QueryFilter
                 case '!':
                     $this->operator = '!=';
                     break;
-                case 'like':
-                    $this->operator = 'LIKE';
-                    $this->value = "%" . $this->value . "%";
-                    break;
                 case 'startwith':
-                    $this->operator = 'LIKE';
-                    $this->value = $this->value . "%";
+                    $this->operatorLike('LIKE', $start=false, $end=true);
                     break;
                 case 'endwith':
-                    $this->operator = 'LIKE';
-                    $this->value = "%" . $this->value;
+                    $this->operatorLike('LIKE', $start=true, $end=false);
+                    break;
+                case 'like':
+                    $this->operatorLike('LIKE', $start=true, $end=true);
                     break;
                 case '!like':
-                    $this->operator = 'NOT LIKE';
-                    $this->value = "%" . $this->value . "%";
+                    $this->operatorLike('NOT LIKE', $start=true, $end=true);
                     break;
                 default:
-                    $this->operator = 'LIKE';
-                    $this->value = "%" . $this->value . "%";
+                    $this->operatorLike('LIKE', $start=true, $end=true);
             }
+        }
+    }
+
+    /**
+     * Create Operator Like with value start % and ends with %
+     * @param $operator
+     * @param bool $start add % to start
+     * @param bool $end add % to end
+     */
+    private function operatorLike($operator, $start=true, $end=true)
+    {
+        $this->operator = $operator;
+        if ($start === true) {
+            $this->value = "%" . $this->value;
+        }
+        if ($end === true) {
+            $this->value .= "%";
         }
     }
 
