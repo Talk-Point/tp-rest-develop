@@ -15,22 +15,22 @@ class QueryOrderBy extends QueryModel
     /**
      * @var string
      */
-    protected $order;
+    protected $ordering;
 
     /**
      * QueryOrderBy constructor.
      * @param string $key sql table column
-     * @param string $order ASC ord DESC
+     * @param string $ordering ASC ord DESC
      */
-    public function __construct($key, $order='ASC')
+    public function __construct($key, $ordering='ASC')
     {
         if (str_contains($key, ';')) {
             $key_array = explode(';', $key);
             $this->key = $key_array[0];
-            $this->order = $key_array[1];
+            $this->ordering = $key_array[1];
         } else {
             $this->key = $key;
-            $this->order = $order;
+            $this->ordering = $ordering;
         }
     }
 
@@ -41,6 +41,6 @@ class QueryOrderBy extends QueryModel
      */
     public function query($query)
     {
-        return $query->orderBy($this->key, $this->order);
+        return $query->orderBy($this->key, $this->ordering);
     }
 }
