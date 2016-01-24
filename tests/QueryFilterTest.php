@@ -9,6 +9,7 @@ use TPREST\Http\RESTQuery;
 
 class QueryFilterTest extends TestCase
 {
+    /*
     public function test_filter_query()
     {
         $count = \App\TestModel::all()->count();
@@ -26,7 +27,7 @@ class QueryFilterTest extends TestCase
         Input::replace($input = ['number_double' => $model->number_float]);
         Input::replace($input = ['is_active' => true]);
         Input::replace($input = ['not_exists_attribute' => true]);*/
-    }
+    }*/
 
     public function test_check_sql()
     {
