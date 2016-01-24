@@ -37,7 +37,7 @@ class QueryFilterWhere extends QueryFilter
      */
     public function __construct($key, $value, $cast_type='string')
     {
-        parent::__construct($key, $value);
+        parent::__construct($key, $value, $cast_type);
         $this->chooseOperator($cast_type);
     }
 
@@ -110,6 +110,7 @@ class QueryFilterWhere extends QueryFilter
      */
     public function query($query)
     {
+        $this->castValue();
         return $query->where($this->key, $this->operator, $this->value);
     }
 }

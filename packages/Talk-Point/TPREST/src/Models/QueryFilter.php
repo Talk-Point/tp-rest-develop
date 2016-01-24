@@ -26,11 +26,13 @@ class QueryFilter extends QueryModel
      * QueryFilter constructor.
      * @param string $key sql table column
      * @param mixed $value value that filtered
+     * @param string $cast_type Type of element
      */
-    public function __construct($key, $value)
+    public function __construct($key, $value, $cast_type='string')
     {
         $this->key = $key;
         $this->value = $value;
+        $this->cast_type = $cast_type;
         $this->extract_options();
     }
 
@@ -47,6 +49,11 @@ class QueryFilter extends QueryModel
      * @var array options after ;
      */
     protected $options_array;
+
+    /**
+     * @var string cast type
+     */
+    protected $cast_type;
 
     /**
      * Extract Options
@@ -67,8 +74,31 @@ class QueryFilter extends QueryModel
         }
     }
 
+    /**
+     * Return the next operator
+     * @return mixed
+     */
     protected function getNextOperator()
     {
         return array_shift($this->options_array);
+    }
+
+    protected function castValue()
+    {
+        switch($this->cast_type) {
+            case 'float':
+                $this->value = floatval($this->value);
+                break;
+            case 'double':
+                $this->value = doubleval($this->value);
+                break;
+            case 'integer':
+                $this->value = intval($this->value);
+                break;
+            case 'array':
+                break;
+            default:
+                $this->value = strval($this->value);
+        }
     }
 }

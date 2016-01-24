@@ -27,4 +27,21 @@ class QueryFilterTest extends TestCase
         Input::replace($input = ['is_active' => true]);
         Input::replace($input = ['not_exists_attribute' => true]);*/
     }
+
+    public function test_check_sql()
+    {
+        Input::replace($input = [
+            'title' => 'Prof',
+            'title2' => 'Prof;!',
+            'number_double' => '3.14;<>',
+            'sortby' => 'id;desc',
+        ]);
+        $sql = RESTQuery::create(TestModel::class)->query()->toSql();
+        var_dump($sql);
+
+        $this->assertContains('where `title` LIKE ?', $sql);
+        $this->assertContains('`title2` != ?', $sql);
+        $this->assertContains('`number_double` <> ?', $sql);
+        $this->assertContains('order by `id` desc', $sql);
+    }
 }
