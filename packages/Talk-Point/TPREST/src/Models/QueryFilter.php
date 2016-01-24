@@ -64,14 +64,22 @@ class QueryFilter extends QueryModel
             $this->options_array = explode(';', $this->value);
             $this->value = $this->options_array[0];
             array_shift($this->options_array);
-            $arr = [];
-            foreach($this->options_array as $e) {
-                if (!(is_string($e) && $e=='')) {
-                    array_push($arr, $e);
-                }
-            }
-            $this->options_array = $arr;
+            $this->remove_empty_options();
         }
+    }
+
+    /**
+     * Remove Empty Values from Option Array
+     */
+    protected function remove_empty_options()
+    {
+        $arr = [];
+        foreach($this->options_array as $e) {
+            if (!(is_string($e) && $e=='')) {
+                array_push($arr, $e);
+            }
+        }
+        $this->options_array = $arr;
     }
 
     /**
@@ -83,6 +91,9 @@ class QueryFilter extends QueryModel
         return array_shift($this->options_array);
     }
 
+    /**
+     * Cast the Value for the query by the cast array
+     */
     protected function castValue()
     {
         switch($this->cast_type) {
