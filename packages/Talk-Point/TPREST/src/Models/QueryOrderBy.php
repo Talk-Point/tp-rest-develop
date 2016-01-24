@@ -41,16 +41,20 @@ class QueryOrderBy extends QueryModel
      */
     public function chooseOrdering($order_key)
     {
+        $ordering = "";
         switch(strtolower($order_key)) {
             case 'ascending':
             case 'asc':
-                return OrderingInterface::ASC;
+                $ordering = OrderingInterface::ASC;
+                break;
             case 'descending':
             case 'desc':
-                return OrderingInterface::DESC;
+                $ordering = OrderingInterface::DESC;
+                break;
             default:
-                return OrderingInterface::ASC;
+                $ordering = OrderingInterface::ASC;
         }
+        return $ordering;
     }
 
     /**
