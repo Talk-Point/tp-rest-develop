@@ -27,13 +27,13 @@ class QueryModelManager
      * Protected Keywords thats not a filter
      * @var array
      */
-    protected $keywords = ['sortby', 'descending', 'ascending', 'desc', 'asc', 'limit', 'offset'];
+    protected $keywords = [ 'sortby', 'descending', 'ascending', 'desc', 'asc', 'limit', 'offset' ];
 
     /**
      * Objects tahts filtered By
      * @var array
      */
-    protected $querys_objetcs = [];
+    protected $querys_objetcs = [ ];
 
     /**
      * @var string Model Class
@@ -78,7 +78,7 @@ class QueryModelManager
     {
         $reflect = new ReflectionClass($this->model_class);
         $props = $reflect->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED);
-        foreach($props as $prop) {
+        foreach ($props as $prop) {
             if ($prop->getName() == 'casts') {
                 return $reflect->getProperty('casts')->getValue(new $this->model_class());
             }
@@ -92,7 +92,7 @@ class QueryModelManager
      */
     protected function createFilterObjects($array)
     {
-        foreach($array as $key => $value) {
+        foreach ($array as $key => $value) {
             $object = QueryFilter::create($key, $value, $this->model_cast_array);
             if (!is_null($object)) {
                 array_push($this->querys_objetcs, $object);
@@ -106,7 +106,7 @@ class QueryModelManager
      */
     protected function createOrderingObjects($array)
     {
-        foreach($array as $key => $value) {
+        foreach ($array as $key => $value) {
             $object = QueryOrders::create($key, $value, '');
             if (!is_null($object)) {
                 array_push($this->querys_objetcs, $object);
@@ -122,11 +122,11 @@ class QueryModelManager
     {
         $limit = null;
         if (array_key_exists('limit', $parameter_array)) {
-            $limit = $parameter_array['limit'];
+            $limit = $parameter_array[ 'limit' ];
         }
         $offset = 0;
         if (array_key_exists('offset', $parameter_array)) {
-            $offset = $parameter_array['offset'];
+            $offset = $parameter_array[ 'offset' ];
         }
         if (!is_null($limit)) {
             array_push($this->querys_objetcs, new QueryOrderLimit($limit, $offset));
