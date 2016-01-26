@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         JeroenG\Packager\PackagerServiceProvider::class,
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
 
         \TPREST\TPRESTServiceProvider::class,
 

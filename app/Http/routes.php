@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('tests', 'TestModelController');
+Route::resource('mongo', 'MongoController');

@@ -25,9 +25,18 @@ $factory->define(\App\TestModel::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
         'is_active' => $faker->boolean(),
-        'number_integer' => $faker->randomDigit(),
+        'number_integer' => $faker->randomNumber(),
         'number_double' => $faker->randomFloat(),
         'number_float' => $faker->randomFloat()
     ];
 });
 
+$factory->define(\App\Mongo::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+        'is_active' => $faker->boolean(),
+        'number_integer' => $faker->randomNumber(),
+        'number_double' => $faker->randomFloat(),
+        'number_float' => $faker->randomFloat()
+    ];
+});
