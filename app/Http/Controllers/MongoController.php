@@ -22,13 +22,6 @@ class MongoController extends Controller
      */
     public function index(Request $request)
     {
-        //$models = RESTQuery::create(TestModel::where('id', '!=', 100), $request);
-
-        //$models = RESTQuery::createForModel($request, TestModel::class)->get();
-
-        $models = RESTQuery::create(Mongo::class)->query()->get();
-        return response()->json($models);
-
         try {
             $models = RESTQuery::create(Mongo::class)->query()->get();
             return response()->json($models);
