@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TestModel;
+use App\Mongo;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use TPREST\Http\RESTQuery;
 
-class TestModelController extends Controller
+class MongoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class TestModelController extends Controller
     public function index(Request $request)
     {
         try {
-            $models = RESTQuery::create(TestModel::class)->query()->get();
+            $models = RESTQuery::create(Mongo::class)->query()->get();
             return response()->json($models);
         } catch (QueryException $e) {
             return response()->json(['message' => 'DB Query Exception', 'invalid' => $e->errorInfo[2]], 422);

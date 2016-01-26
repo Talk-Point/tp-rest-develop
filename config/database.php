@@ -85,6 +85,15 @@ return [
             'prefix'   => '',
         ],
 
+        'mongodb' => array(
+            'driver'   => 'mongodb',
+            'host'     => env('DB_MONGO_HOST', '192.168.72.100'),
+            'port'     => env('DB_MONGO_PORT', 27017),
+            'database' => env('DB_MONGO_DATABASE', 'tp-rest-develop'),
+            'username' => env('DB_MONGO_USERNAME', ''),
+            'password' => env('DB_MONGO_PASSWORD', ''),
+        ),
+
     ],
 
     /*
