@@ -10,6 +10,8 @@ class MongoQueryTest extends TestCase
     {
         $object = \App\Mongo::first();
 
+        var_dump($object);
+
         $this->visit('/mongo')
              ->see($object->title);
 
